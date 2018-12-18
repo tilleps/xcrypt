@@ -1,0 +1,26 @@
+{
+  "name": "xcrypt",
+  "version": "0.2.0",
+  "description": "Cross platform compatible encrypt and decrypt methods",
+  "main": "lib/index.js",
+  "bin": {
+    "prompt": "./bin/prompt.sh",
+    "xcrypt": "./bin/xcrypt.sh"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "yargs": "^12.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "encryption",
+    "crypt"
+  ],
+  "author": "Eugene Song <tilleps@gmail.com>",
+  "license": "MIT"
+}
