@@ -48,8 +48,21 @@ usage() {
 }
 
 
+#  MD5 Function
+if hash md5 2>/dev/null; then
+  md5string() {
+    md5 -q -s "$1"
+  }
+else
+  md5string() {
+    echo -n "$1" | md5sum | cut -d" " -f1
+  }
+fi
+
+
+
 encrypt() {
-  local KEYHASH=$(md5 -q -s "$SECRET_KEY")
+  local KEYHASH=$(md5string "$SECRET_KEY")
   local KEYHASH_HEX=$(echo -n "$KEYHASH" | xxd -ps -cols 32)
 
   #  Generate a new IV
@@ -74,7 +87,7 @@ decrypt() {
       let i++
     done
 
-    local KEYHASH=$(md5 -q -s "$SECRET_KEY")
+    local KEYHASH=$(md5string "$SECRET_KEY")
     local KEYHASH_HEX=$(echo -n "$KEYHASH" | xxd -ps -cols 32)
 
     local CRYPTOR=${BASH_REMATCH[1]}
@@ -85,7 +98,7 @@ decrypt() {
 
     local IV_HEX=$(echo -n "$IV" | xxd -ps -cols 32)
     
-    echo -n "$ENCRYPTED" | base64 -D | openssl enc -d -"$ALGORITHM" -iv "$IV_HEX" -K "$KEYHASH_HEX"
+    echo -n "$ENCRYPTED" | base64 --decode | openssl enc -d -"$ALGORITHM" -iv "$IV_HEX" -K "$KEYHASH_HEX"
   else
     exit_error "Unrecognized encrypted format"
   fi
