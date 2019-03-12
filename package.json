@@ -1,6 +1,6 @@
 {
   "name": "xcrypt",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Cross platform compatible encrypt and decrypt methods",
   "main": "lib/index.js",
   "bin": {
