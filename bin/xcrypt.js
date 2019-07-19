@@ -2,7 +2,7 @@
 "use strict";
 
 const crypto = require("crypto");
-const VERSION = "0.3.1";
+const VERSION = require("../package.json").version;
 
 const encrypt = require("../lib").encrypt;
 const decrypt = require("../lib").decrypt;
