@@ -1,6 +1,6 @@
 {
   "name": "xcrypt",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Cross platform compatible encrypt and decrypt methods",
   "main": "lib/index.js",
   "bin": {
@@ -11,10 +11,10 @@
     "lib": "lib"
   },
   "dependencies": {
-    "yargs": "^12.0.5"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "tap": "^14.4.2"
+    "tap": "^16.3.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
