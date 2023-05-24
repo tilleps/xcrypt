@@ -1,15 +1,16 @@
 #!/usr/bin/env node
-"use strict";
 
-const crypto = require("crypto");
-const VERSION = require("../package.json").version;
-
-const encrypt = require("../lib").encrypt;
-const decrypt = require("../lib").decrypt;
+import { encrypt, decrypt } from "xcrypt";
+import yargs from "yargs";
 
 
 //  https://github.com/yargs/yargs/blob/master/docs/api.md
-const opts = require("yargs")
+
+
+/**
+ * @type {import("yargs").Arguments}
+ */
+const opts = await yargs
   .usage("Usage: $0")
   .help("help")
   .option("secret", {
@@ -80,7 +81,7 @@ function getPipedData() {
   
   switch (mode) {
     case "encrypt":
-      const encrypted = encrypt(data, secretKey, algorithm, VERSION);
+      const encrypted = encrypt(data, secretKey, algorithm);
       process.stdout.write(encrypted);
       break;
       
@@ -91,7 +92,7 @@ function getPipedData() {
       
     default:
       console.error(`Unsupported mode: ${mode}`);
-      exit(1);
+      process.exit(1);
       break;
   }
 }());

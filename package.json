@@ -1,8 +1,8 @@
 {
   "name": "xcrypt",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Cross platform compatible encrypt and decrypt methods",
-  "main": "lib/index.js",
+  "main": "lib/index.mjs",
   "bin": {
     "prompt": "./bin/prompt.sh",
     "xcrypt": "./bin/xcrypt.sh"
@@ -10,14 +10,30 @@
   "directories": {
     "lib": "lib"
   },
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "require": "./lib/*.js"
+    }
+  },
+  "types": "./lib/index.d.ts",
   "dependencies": {
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "tap": "^16.3.4"
+    "@types/node": "^20.2.3",
+    "@types/tap": "^15.0.8",
+    "@types/yargs": "^17.0.24",
+    "tap": "^16.3.4",
+    "typescript": "^5.0.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type-check": "tsc -p tsconfig.json"
   },
   "keywords": [
     "encryption",

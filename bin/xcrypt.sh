@@ -26,10 +26,10 @@ readonly ARGNUM="$#"
 ALGORITHM=aes-256-ctr
 MODE="encrypt"
 SECRET_KEY=""
-VERSION="0.4.0"
+VERSION="0.5.0"
 
-#  version:algorithm:iv:payload
-PATTERN="^([^:]+):([^:]+):([^:]+):([^:]+):([^:]+)$"
+#  algorithm:iv:payload
+PATTERN="^([^:]+):([^:]+):([^:]+):([^:]+)$"
 
 #  Get piped data
 #  https://stackoverflow.com/a/16490611/2424549
@@ -71,7 +71,7 @@ encrypt() {
 
   local ENCRYPTED=$(echo -n "$INPUT" | openssl enc -"$ALGORITHM" -iv "$IV_HEX" -K "$KEYHASH_HEX" | base64)
 
-  echo -n "xcrypt:$VERSION:$ALGORITHM:$IV:$ENCRYPTED"
+  echo -n "xcrypt:$ALGORITHM:$IV:$ENCRYPTED"
 }
 
 
@@ -91,10 +91,9 @@ decrypt() {
     local KEYHASH_HEX=$(echo -n "$KEYHASH" | xxd -ps -cols 32)
 
     local CRYPTOR=${BASH_REMATCH[1]}
-    local VERSION=${BASH_REMATCH[2]}
-    local ALGORITHM=${BASH_REMATCH[3]}
-    local IV=${BASH_REMATCH[4]}
-    local ENCRYPTED=${BASH_REMATCH[5]}
+    local ALGORITHM=${BASH_REMATCH[2]}
+    local IV=${BASH_REMATCH[3]}
+    local ENCRYPTED=${BASH_REMATCH[4]}
 
     local IV_HEX=$(echo -n "$IV" | xxd -ps -cols 32)
     
