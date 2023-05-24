@@ -1,1 +1,1 @@
-declare module "xcrypt"
+declare module "xcrypt";
