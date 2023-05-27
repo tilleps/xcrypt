@@ -2,7 +2,9 @@
   "name": "xcrypt",
   "version": "0.5.0",
   "description": "Cross platform compatible encrypt and decrypt methods",
-  "main": "lib/index.mjs",
+  "type": "module",
+  "main": "build/index.js",
+  "module": "lib/index.js",
   "bin": {
     "prompt": "./bin/prompt.sh",
     "xcrypt": "./bin/xcrypt.sh"
@@ -12,12 +14,16 @@
   },
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
+      "require": "./build/index.mjs",
       "import": "./lib/index.mjs",
-      "require": "./lib/index.js"
+      "default": "./lib/index.mjs"
     },
     "./*": {
+      "types": "./lib/*.d.ts",
+      "require": "./build/*.mjs",
       "import": "./lib/*.mjs",
-      "require": "./lib/*.js"
+      "default": "./build/*.mjs"
     }
   },
   "types": "./lib/index.d.ts",

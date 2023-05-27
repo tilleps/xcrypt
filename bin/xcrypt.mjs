@@ -5,33 +5,6 @@ import yargs from "yargs";
 
 //  https://github.com/yargs/yargs/blob/master/docs/api.md
 
-/**
- * @type {import("yargs").Arguments}
- */
-const opts = await yargs
-  .usage("Usage: $0")
-  .help("help")
-  .option("secret", {
-    demandOption: true,
-    alias: "s",
-    describe: "The secret key used to encrypt/decrypt"
-  })
-  .option("decrypt", {
-    alias: "d",
-    boolean: true,
-    describe: "Set mode to decrypt"
-  })
-  .option("list-algorithms", {
-    alias: "l",
-    boolean: true,
-    describe: "List the supported algorithms"
-  })
-  .option("algorithm", {
-    alias: "a",
-    default: "aes-256-ctr",
-    describe: "Set the cipher algorithm used to encrypt"
-  }).argv;
-
 function getPipedData() {
   return new Promise(function (resolve, reject) {
     let data = "";
@@ -54,6 +27,33 @@ function getPipedData() {
 }
 
 (async function main() {
+  /**
+   * @type {import("yargs").Arguments}
+   */
+  const opts = await yargs
+    .usage("Usage: $0")
+    .help("help")
+    .option("secret", {
+      demandOption: true,
+      alias: "s",
+      describe: "The secret key used to encrypt/decrypt"
+    })
+    .option("decrypt", {
+      alias: "d",
+      boolean: true,
+      describe: "Set mode to decrypt"
+    })
+    .option("list-algorithms", {
+      alias: "l",
+      boolean: true,
+      describe: "List the supported algorithms"
+    })
+    .option("algorithm", {
+      alias: "a",
+      default: "aes-256-ctr",
+      describe: "Set the cipher algorithm used to encrypt"
+    }).argv;
+
   const mode = opts.decrypt ? "decrypt" : "encrypt";
   const secretKey = opts.secret;
 

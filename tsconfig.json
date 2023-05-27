@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "checkJs": true,
     "esModuleInterop": true,
     "module": "es2022",
     "moduleResolution": "Node",
-    "target": "es2017",
-    "checkJs": true,
     "noEmit": true,
-    "strict": true
-  }
+    "strict": true,
+    "target": "es2017"
+  },
+  "exclude": ["node_modules", "dist", "bin"],
+  "include": ["lib"]
 }
