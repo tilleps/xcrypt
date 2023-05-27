@@ -1,8 +1,7 @@
 {
   "name": "xcrypt",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Cross platform compatible encrypt and decrypt methods",
-  "main": "lib/index.js",
   "bin": {
     "prompt": "./bin/prompt.sh",
     "xcrypt": "./bin/xcrypt.sh"
@@ -10,14 +9,52 @@
   "directories": {
     "lib": "lib"
   },
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./lib/index.mjs",
+      "default": "./lib/index.mjs"
+    },
+    "./*": {
+      "types": "./lib/*.d.ts",
+      "require": "./dist/*.js",
+      "import": "./lib/*.mjs",
+      "default": "./lib/*.mjs"
+    }
+  },
+  "types": "./lib/index.d.ts",
+  "tsup": {
+    "skipNodeModulesBundle": true
+  },
+  "tap": {
+    "node-arg": [
+      "--no-warnings",
+      "--experimental-loader",
+      "@istanbuljs/esm-loader-hook"
+    ]
+  },
   "dependencies": {
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "tap": "^16.3.4"
+    "@istanbuljs/esm-loader-hook": "^0.2.0",
+    "@types/node": "^20.2.3",
+    "@types/tap": "^15.0.8",
+    "@types/yargs": "^17.0.24",
+    "prettier": "^2.8.8",
+    "tap": "^16.3.4",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap lib/*.test.mjs",
+    "test:report": "tap --coverage-report=html lib/*.test.mjs",
+    "clean": "rm -Rf ./dist",
+    "build": "npm run clean && tsup lib/*.mjs",
+    "format": "prettier --write lib/ bin/",
+    "type-check": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "encryption",
