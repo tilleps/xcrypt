@@ -1,6 +1,6 @@
 {
   "name": "xcrypt",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Cross platform compatible encrypt and decrypt methods",
   "bin": {
     "prompt": "./bin/prompt.sh",
@@ -43,7 +43,7 @@
     "@types/tap": "^15.0.8",
     "@types/yargs": "^17.0.24",
     "prettier": "^2.8.8",
-    "tap": "^16.3.4",
+    "tap": "^16.3.8",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4"
   },
