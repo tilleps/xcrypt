@@ -35,6 +35,9 @@ function encrypt(value, key, algorithm) {
   return ["xcrypt", algorithm, iv, encrypted.toString("base64")].join(":");
 }
 function decrypt(value, key) {
+  if (typeof value !== "string") {
+    throw new TypeError("Encrypted value must be a string");
+  }
   const ctx = value.split(":");
   if (ctx.length !== 4) {
     throw new Error("Invalid encrypted format");

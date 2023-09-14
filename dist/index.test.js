@@ -15,6 +15,9 @@ function encrypt(value, key, algorithm) {
   return ["xcrypt", algorithm, iv, encrypted.toString("base64")].join(":");
 }
 function decrypt(value, key) {
+  if (typeof value !== "string") {
+    throw new TypeError("Encrypted value must be a string");
+  }
   const ctx = value.split(":");
   if (ctx.length !== 4) {
     throw new Error("Invalid encrypted format");
@@ -55,6 +58,24 @@ function decrypt(value, key) {
       }
       t3.end();
     });
+    t2.end();
+  });
+  t.test("invalid encrypted value type", function(t2) {
+    let secretKey = "SECRET_KEY";
+    let encryptedValue = void 0;
+    let result;
+    try {
+      result = decrypt(encryptedValue, secretKey);
+      t2.fail("should throw error");
+    } catch (err) {
+      t2.ok(err);
+      if (err instanceof TypeError) {
+        t2.equal(err.message, "Encrypted value must be a string");
+        t2.pass("should throw error");
+      } else {
+        t2.fail("should throw error");
+      }
+    }
     t2.end();
   });
   t.test("invalid encrypted format", function(t2) {
