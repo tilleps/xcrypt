@@ -5,8 +5,8 @@
 #  @author Eugene Song <tilleps@gmail.com>
 #
 #: Usage:
-#:    xcrypt -k <key> [options]... -- <input>
-#:    xcrypt -k <key> --decrypt [options]... -- <input>
+#:    xcrypt -s <secret> [options]... -- <input>
+#:    xcrypt -s <secret> --decrypt [options]... -- <input>
 #:
 #: Options:
 #:   --version              Show version number                           [boolean]

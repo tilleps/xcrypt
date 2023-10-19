@@ -30,8 +30,8 @@ function getPipedData() {
   /**
    * @type {import("yargs").Arguments}
    */
-  const opts = await yargs
-    .usage("Usage: $0")
+  const opts = await yargs(process.argv.slice(2))
+    .usage("Usage: $0 -s <secret>")
     .help("help")
     .option("secret", {
       demandOption: true,
