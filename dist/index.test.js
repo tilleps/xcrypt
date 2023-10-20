@@ -12,13 +12,13 @@ function encrypt(value, key, algorithm) {
   algorithm = algorithm || DEFAULT_ALGORITHM;
   const cipher = (0, import_crypto.createCipheriv)(algorithm, keyHash, iv);
   let encrypted = Buffer.concat([cipher.update(value, "utf8"), cipher.final()]);
-  return ["xcrypt", algorithm, iv, encrypted.toString("base64")].join(":");
+  return ["", algorithm, iv, encrypted.toString("base64")].join("$");
 }
 function decrypt(value, key) {
   if (typeof value !== "string") {
     throw new TypeError("Encrypted value must be a string");
   }
-  const ctx = value.split(":");
+  const ctx = value.split("$");
   if (ctx.length !== 4) {
     throw new Error("Invalid encrypted format");
   }
@@ -98,7 +98,7 @@ function decrypt(value, key) {
   });
   t.test("unknown cipher", function(t2) {
     let secretKey = "SECRET_KEY";
-    let encryptedValue = ":::";
+    let encryptedValue = "$$$";
     let result;
     try {
       result = decrypt(encryptedValue, secretKey);
