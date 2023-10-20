@@ -1,6 +1,7 @@
 # xcrypt
 
-Xcrypt is utility intended to encrypt and decrypt content across multiple languages
+Xcrypt is utility intended to encrypt and decrypt content across different languages,
+primarily between NodeJS and bash/shell
 
 Author: Eugene Song 
 

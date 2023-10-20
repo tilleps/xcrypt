@@ -5,8 +5,8 @@
 #  @author Eugene Song <tilleps@gmail.com>
 #
 #: Usage:
-#:    xcrypt -k <key> [options]... -- <input>
-#:    xcrypt -k <key> --decrypt [options]... -- <input>
+#:    xcrypt -s <secret> [options]... -- <input>
+#:    xcrypt -s <secret> --decrypt [options]... -- <input>
 #:
 #: Options:
 #:   --version              Show version number                           [boolean]
@@ -26,10 +26,10 @@ readonly ARGNUM="$#"
 ALGORITHM=aes-256-ctr
 MODE="encrypt"
 SECRET_KEY=""
-VERSION="0.5.0"
+VERSION="0.6.0"
 
-#  algorithm:iv:payload
-PATTERN="^([^:]+):([^:]+):([^:]+):([^:]+)$"
+#  $algorithm$iv$payload
+PATTERN='^\$([^\$]+)\$([^\$]+)\$([^\$]+)$'
 
 #  Get piped data
 #  https://stackoverflow.com/a/16490611/2424549
@@ -71,7 +71,7 @@ encrypt() {
 
   local ENCRYPTED=$(echo -n "$INPUT" | openssl enc -"$ALGORITHM" -iv "$IV_HEX" -K "$KEYHASH_HEX" | base64)
 
-  echo -n "xcrypt:$ALGORITHM:$IV:$ENCRYPTED"
+  echo -n "\$$ALGORITHM\$$IV\$$ENCRYPTED"
 }
 
 
@@ -90,10 +90,9 @@ decrypt() {
     local KEYHASH=$(md5string "$SECRET_KEY")
     local KEYHASH_HEX=$(echo -n "$KEYHASH" | xxd -ps -cols 32)
 
-    local CRYPTOR=${BASH_REMATCH[1]}
-    local ALGORITHM=${BASH_REMATCH[2]}
-    local IV=${BASH_REMATCH[3]}
-    local ENCRYPTED=${BASH_REMATCH[4]}
+    local ALGORITHM=${BASH_REMATCH[1]}
+    local IV=${BASH_REMATCH[2]}
+    local ENCRYPTED=${BASH_REMATCH[3]}
 
     local IV_HEX=$(echo -n "$IV" | xxd -ps -cols 32)
     
