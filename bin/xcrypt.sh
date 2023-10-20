@@ -26,7 +26,7 @@ readonly ARGNUM="$#"
 ALGORITHM=aes-256-ctr
 MODE="encrypt"
 SECRET_KEY=""
-VERSION="0.6.0"
+VERSION="0.6.1"
 
 #  $algorithm$iv$payload
 PATTERN='^\$([^\$]+)\$([^\$]+)\$([^\$]+)$'
