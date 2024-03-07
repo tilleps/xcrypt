@@ -1,6 +1,6 @@
 {
   "name": "xcrypt",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Cross platform compatible encrypt and decrypt methods",
   "bin": {
     "prompt": "./bin/prompt.sh",
@@ -35,15 +35,16 @@
     ]
   },
   "dependencies": {
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.7"
   },
   "devDependencies": {
     "@istanbuljs/esm-loader-hook": "^0.2.0",
     "@types/node": "^20.8.7",
+    "@types/react": "^18.2.64",
     "@types/tap": "^15.0.10",
     "@types/yargs": "^17.0.29",
     "prettier": "^3.0.3",
-    "tap": "^18.5.2",
+    "tap": "^18.7.0",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
